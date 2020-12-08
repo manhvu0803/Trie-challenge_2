@@ -13,14 +13,16 @@ struct node
 
     node(char c): ch(c) {};
 
-    unsigned int childCnt()
-    {
-        int cnt = 0;
-        for (int i = 0; i < 26; ++i)
-            if (next[i] != nullptr) ++cnt;
-        return cnt;
-    }
+    unsigned int childCnt();
 };
+
+unsigned int node::childCnt()
+{
+    int cnt = 0;
+    for (int i = 0; i < 26; ++i)
+        if (next[i] != nullptr) ++cnt;
+    return cnt;
+}
 
 void printWord(std::ostream& out, node* cur, char str[], bool valid[], int pos = 0)
 {
@@ -70,7 +72,7 @@ class trie
         bool remove(const std::string& word);
 
         void search(const std::string& word);
-        void listValidate(std::ostream& out, const std::string& word, const std::unordered_set<std::string>& st);
+        void listValidate(std::ostream& out, const std::string& word, std::unordered_set<std::string>* st = nullptr);
         
         // The function to list all possible word from given characters
         void list(std::ostream& out, const std::string& word);
