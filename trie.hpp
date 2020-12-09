@@ -165,7 +165,7 @@ void trie::list(std::ostream& out, const std::string& word)
     
     std::memset(valid, false, sizeof(valid));
     for (int i = 0, lim = word.length(); i < lim; ++i)
-        if (word[i] - 'a' >= 0 || word[i] - 'a' <= 26) valid[word[i] - 'a'] = true;
+        if (word[i] - 'a' >= 0 && word[i] - 'a' <= 26) valid[word[i] - 'a'] = true;
     
     listWord(qu, root, str, valid);
     
