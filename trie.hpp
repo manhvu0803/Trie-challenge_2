@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <queue>
 #include <unordered_set>
+#include <cstring>
 
 struct node
 {
@@ -44,7 +45,7 @@ void listWord(std::queue<std::string>& qu, node* cur, char str[], bool valid[], 
     if (cur->eow) {
         str[pos] = '\0';
         std::string s = str;
-        qu.push(s);
+        if (s.length() > 2) qu.push(s);
     }
 
     for (int i = 0; i < 26; ++i)
@@ -141,7 +142,7 @@ void trie::listValidate(std::ostream& out, const std::string& word, std::unorder
     bool valid[26];
     std::queue<std::string> qu;
     
-    memset(valid, false, sizeof(valid));
+    std::memset(valid, false, sizeof(valid));
     for (int i = 0, lim = word.length(); i < lim; ++i)
         if (word[i] - 'a' >= 0 || word[i] - 'a' <= 26) valid[word[i] - 'a'] = true;
     
@@ -162,7 +163,7 @@ void trie::list(std::ostream& out, const std::string& word)
     bool valid[26];
     std::queue<std::string> qu;
     
-    memset(valid, false, sizeof(valid));
+    std::memset(valid, false, sizeof(valid));
     for (int i = 0, lim = word.length(); i < lim; ++i)
         if (word[i] - 'a' >= 0 || word[i] - 'a' <= 26) valid[word[i] - 'a'] = true;
     
@@ -179,7 +180,7 @@ std::ostream& operator<<(std::ostream& out, const trie& tr)
 {
     char str[128];
     bool valid[26];
-    memset(valid, true, sizeof(valid));
+    std::memset(valid, true, sizeof(valid));
     printWord(out, tr.root, str, valid);
     return out;
 }
